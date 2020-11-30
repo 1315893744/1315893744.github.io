@@ -1,256 +1,45 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="pragma" content="no-cache">
-  <meta http-equiv="cache-control" content="no-cache">
-  <meta http-equiv="expires" content="0">
-  
-  <title>林中有梦</title>
-  <meta name="author" content="思凡小青蛙">
-  
-  <meta name="description" content="高效的文件存储方式现状在这个年代，很多人都有多个电子设备，而承载信息的媒介总是碎片化的。这意味着你不能随时get到你想拥有的文件，这使得效率低下。拿一个普通人举例，他的照片存在手机里，会定期导入电脑中，工作文件存储在电脑里，只有很少的文件会通过QQ、微信存到手机中，一旦他不能同时在两个设备身边，他就">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+{# 文章页面 #}
+{% extends 'includes/layout.swig' %}
 
-  
-  <meta property="og:site_name" content="林中有梦"/>
+{# page页面(其实就是about)，也是用的这里来处理文章排版 #}
+{% block body %}
+  <article class="markdown-body">
+    <h2 id="post-title">{{ page.title }}
+      {% if is_post() && page.date %} {# 文章页面才显示日期 #}
+        <div id="post-time" datetime="{{ date_xml(page.date) }}">
+          {{ date(page.date, "YYYY-MM-DD") }}
+        </div>
+      {% endif %}
+    </h2>
+    {{ page.content }}
+  </article>
 
-  
-    <meta property="og:image" content=""/>
-  
+  {% if is_post() %}
+    
+    {% if page.prev || page.next  %}
+      <div id="page-prev-next">
+        {# 上一篇文章 #}
+        {% if (page.prev) %}
+          <a id="page-prev-a" href="{{ url_for(page.prev.path) }}"> ← {{ page.prev.title }} </a>
+        {% else %}
+          <div></div> {# 仅用于占位 #}
+        {% endif %}
 
-  
-  
-    <link href="/favicon.png" rel="icon">
-  
-  
-  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-  <script src="/js/jquery-2.0.3.min.js"></script>
-
-  <!-- analytics -->
-  
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-70812759-1', 'auto');
-  ga('send', 'pageview');
-</script>
-
-
-
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="林中有梦" type="application/atom+xml">
-</head>
-
- <body>  
-  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-		<span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-	  <a class="navbar-brand" href="/">林中有梦</a>
-      <div class="collapse navbar-collapse nav-menu">
-		<ul class="nav navbar-nav">
-		  
-		  <li>
-			<a href="/archives" title="All the articles.">
-			  <i class=""></i>Archives
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/categories" title="All the categories.">
-			  <i class=""></i>Categories
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/tags" title="All the tags.">
-			  <i class=""></i>Tags
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/about" title="About me.">
-			  <i class=""></i>About
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/atom.xml" title="Subscribe me.">
-			  <i class=""></i>RSS
-			</a>
-		  </li>
-		  
-		</ul>
+        {# 下一篇文章 #}
+        {% if (page.next) %}
+          <a id="page-next-a" href="{{ url_for(page.next.path) }}"> {{ page.next.title }} → </a>
+        {% endif %}
       </div>
-    </div> <!-- container -->
-</nav>
-<div class="clearfix"></div>
-
-  <div class="container">
-  	<div class="content">
-    	 
-
-
-	
-		<div class="page-header">
-			<h1> </h1>
-		</div>
-	
-
-
-
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
-
-	<!-- content -->
-	<div class="mypage">		
-	  		
-
-	  <h1 id="高效的文件存储方式"><a href="#高效的文件存储方式" class="headerlink" title="高效的文件存储方式"></a>高效的文件存储方式</h1><h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>在这个年代，很多人都有多个电子设备，而承载信息的媒介总是碎片化的。这意味着你不能随时get到你想拥有的文件，这使得效率低下。<br>拿一个普通人举例，他的照片存在手机里，会定期导入电脑中，工作文件存储在电脑里，只有很少的文件会通过QQ、微信存到手机中，一旦他不能同时在两个设备身边，他就不能及时访问到需要的文件。更别提那些存储在存储介质中的文件啦。<br>当然，一些同步工具可以使他在手机端访问一些电脑文件，如用微软的Office365,WPS,石墨文档可以同步办公文档，OneDrive可以备份Windows电脑的特定文件夹，坚果云可以同步文件夹，跨平台。百度网盘可以自动备份照片，也可以同步文件夹算是云服务中做的较好的了。<br>像手机厂商提供的云服务，做的好的只有苹果，可以储存应用数据，值得称赞的是OPPO有微信、QQ消息云端备份和手机应用全盘备份，像小米等厂商就只能同步照片。</p>
-<h2 id="可以更好吗"><a href="#可以更好吗" class="headerlink" title="可以更好吗"></a>可以更好吗</h2><p>如果应用可以把数据存储在手机中，并对关键数据进行标识，让应用数据存在系统同步的黑盒中，主要用于意外数据丢失恢复（类似iCloud），另外是一些文件存储在系统同步中，手机操作系统会把文件自动存储在云端，你在其他客户端通过握手系统就能访问。<br>只要云端的安全性得到保障，用户的跨平台体验就会很好。<br>iOS的思路是文件是存储在应用中的，只能通过应用访问数据，会使数据更加清晰</p>
-	  
-	</div>
-
-	<div>
-  	<center>
-	<div class="pagination">
-
+    {% endif %}
     
-    
-    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>上一页</a>
-    
+    {# 背景音频播放 #}
+    {% if theme.post_audio %}
+      {% set bg_color =  theme.theme_color %}
+      {% include 'includes/audio-play.swig' with bg_color %}
+    {% endif %}
 
-    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
-    
-    <a href="/2020/10/23/e1/" type="button" class="btn btn-default ">下一页<i
-                class="fa fa-arrow-circle-o-right"></i></a>
-    
+    {# 文章页面才加打赏功能 #}
+    {% include 'includes/reward.swig' %}
+  {% endif %}
+{% endblock %}
 
-    
-</div>
-
-    </center>
-	</div>
-	
-	<!-- comment -->
-	
-<section id="comment">
-    <h2 class="title">留言</h2>
-
-    
-</section>
-
-
-	</div> <!-- col-md-9/col-md-12 -->
-		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
-
-	<!-- date -->
-	
-	<div class="meta-widget">
-	<i class="fa fa-clock-o"></i>
-	2020-10-26 
-	</div>
-	
-
-	<!-- categories -->
-    
-
-	<!-- tags -->
-		
-
-	<!-- toc -->
-	<div class="meta-widget">
-	
-	</div>
-	
-    <hr>
-	
-</div><!-- col-md-3 -->
-
-	</div>
-		
-
-</div><!-- row -->
-
-
-
-	</div>
-  </div>
-  <div class="container-narrow">
-  <footer> <p>
-  &copy; 2020 思凡小青蛙
-  
-      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
-     <br> Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
-</p>
- </footer>
-</div> <!-- container-narrow -->
-  
-
-
-  
-<a id="gotop" href="#">   
-  <span>⬆︎TOP</span>
-</a>
-
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
-
-
-
-   <script type="text/javascript">      
-     var search_path = "search.xml";
-	 if (search_path.length == 0) {
-	 	search_path = "search.xml";
-	 }
-	 var path = "/" + search_path;
-     searchFunc(path, 'local-search-input', 'local-search-result');
-   </script>
-
-</body>
-   </html>
